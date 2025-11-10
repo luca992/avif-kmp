@@ -51,8 +51,8 @@ kotlin {
 
         val arch = when (name) {
             "iosSimulatorArm64" -> "aarch64-sim"
-            "iosX64" -> "aarch64"
-            "iosArm64" -> "x86_64"
+            "iosX64" -> "x86_64"
+            "iosArm64" -> "aarch64"
             else -> error("avif not support with target: $name")
         }
 
