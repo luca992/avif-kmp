@@ -137,7 +137,7 @@ actual class AvifDecoder private constructor(
         return decoder.repetitionCount
     }
 
-    override fun close() {
+    actual override fun close() {
         avifDecoderDestroy(decoderPtr)
     }
 }

@@ -26,11 +26,12 @@ import com.seiko.avif.compose.asImageBitmap
 import com.seiko.avif.createPlatformBitmap
 import com.seiko.avif.getBitmapResult
 import com.seiko.avif.use
+import io.github.qdsfdhvh.shared.generated.resources.Res
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.resource
+import org.jetbrains.compose.resources.readResourceBytes
 import kotlin.time.Duration.Companion.milliseconds
 
 @OptIn(ExperimentalResourceApi::class)
@@ -45,7 +46,7 @@ fun App() {
             Text(title1, textAlign = TextAlign.Center)
             Spacer(Modifier.height(8.dp))
             val painter1 by produceState<Painter>(EmptyPainter) {
-                val bytes = resource("test.avif").readBytes()
+                val bytes = Res.readBytes("files/test.avif")
                 title1 += "isAvif=${AvifDecoder.isAvifImage(bytes)}\n"
 
                 AvifDecoder.create(bytes).use { decoder ->
@@ -74,7 +75,7 @@ fun App() {
             Spacer(Modifier.height(8.dp))
             val painter2 by produceState<Painter>(EmptyPainter) {
                 withContext(Dispatchers.Default) {
-                    val bytes = resource("test_anime.avif").readBytes()
+                    val bytes = Res.readBytes("files/test_anime.avif")
                     title2 += "isAvif=${AvifDecoder.isAvifImage(bytes)}\n"
 
                     AvifDecoder.create(bytes).use { decoder ->

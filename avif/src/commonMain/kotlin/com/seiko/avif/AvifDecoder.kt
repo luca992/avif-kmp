@@ -65,6 +65,8 @@ expect class AvifDecoder : Closeable {
      * details).
      */
     fun getRepetitionCount(): Int
+
+    override fun close()
 }
 
 fun AvifDecoder.hasNext(): Boolean {
