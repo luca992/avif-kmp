@@ -2,19 +2,20 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("org.jetbrains.compose")
+    id("org.jetbrains.kotlin.plugin.compose")
     id("com.vanniktech.maven.publish")
 }
 
 kotlin {
     androidTarget {
-        publishAllLibraryVariants()
+        publishLibraryVariants("release", "debug")
     }
     jvm()
     iosX64()
     iosArm64()
     iosSimulatorArm64()
     @Suppress("OPT_IN_USAGE")
-    targetHierarchy.custom {
+    applyHierarchyTemplate {
         common {
             withAndroidTarget()
             group("skia") {
@@ -33,7 +34,6 @@ kotlin {
             }
         }
     }
-    jvmToolchain(11)
 }
 
 android {

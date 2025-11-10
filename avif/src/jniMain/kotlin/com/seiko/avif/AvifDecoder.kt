@@ -64,7 +64,7 @@ actual class AvifDecoder private constructor(
         return getRepetitionCount(context)
     }
 
-    override fun close() {
+    actual override fun close() {
         val contextToClose = context
         if (contextToClose != 0L) {
             context = 0L

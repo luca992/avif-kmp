@@ -8,14 +8,14 @@ plugins {
 
 kotlin {
     androidTarget {
-        publishAllLibraryVariants()
+        publishLibraryVariants("release", "debug")
     }
     jvm()
     iosX64()
     iosArm64()
     iosSimulatorArm64()
     @Suppress("OPT_IN_USAGE")
-    targetHierarchy.custom {
+    applyHierarchyTemplate {
         common {
             group("jni") {
                 withAndroidTarget()
@@ -75,13 +75,15 @@ kotlin {
                 // )
             }
         }
-        main.kotlinOptions {
+        main.compileTaskProvider.configure {
             // https://youtrack.jetbrains.com/issue/KT-39396
-            freeCompilerArgs += listOf(
-                "-include-binary",
-                "$libraryPath/libdav1d.a",
-                "-include-binary",
-                "$libraryPath/libavif.a",
+            compilerOptions.freeCompilerArgs.addAll(
+                listOf(
+                    "-include-binary",
+                    "$libraryPath/libdav1d.a",
+                    "-include-binary",
+                    "$libraryPath/libavif.a",
+                ),
             )
         }
     }
