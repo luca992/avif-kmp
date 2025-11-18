@@ -1,5 +1,3 @@
-import com.vanniktech.maven.publish.SonatypeHost
-
 plugins {
     // this is necessary to avoid the plugins to be loaded multiple times
     // in each subproject's classloader
@@ -27,34 +25,33 @@ subprojects {
             ktlint(ktlintVersion)
         }
     }
-    group = "io.github.qdsfdhvh"
+    group = "media.kamel"
     version = "0.0.1"
-    plugins.withId("com.vanniktech.maven.publish.base") {
-        mavenPublishing {
-            publishToMavenCentral(SonatypeHost.S01)
-            signAllPublications()
-            @Suppress("UnstableApiUsage")
-            pom {
-                name.set("avif-kmp")
-                description.set("Kotlin Multi Platform bindings for AOMediaCodec libavif library.")
-                url.set("https://github.com/qdsfdhvh/avif-kmp")
-                licenses {
-                    license {
-                        name.set("The Apache License 2.0")
-                        url.set("https://opensource.org/licenses/Apache-2.0")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("Seiko")
-                        name.set("SeikoDes")
-                        email.set("seiko_des@outlook.com")
-                    }
-                }
-                scm {
+    afterEvaluate {
+        extensions.findByType<PublishingExtension>()?.apply {
+            publications.withType<MavenPublication>().configureEach {
+                pom {
+                    name.set("avif-kmp")
+                    description.set("Kotlin Multi Platform bindings for AOMediaCodec libavif library.")
                     url.set("https://github.com/qdsfdhvh/avif-kmp")
-                    connection.set("scm:git:git://github.com/qdsfdhvh/avif-kmp.git")
-                    developerConnection.set("scm:git:git://github.com/qdsfdhvh/avif-kmp.git")
+                    licenses {
+                        license {
+                            name.set("The Apache License 2.0")
+                            url.set("https://opensource.org/licenses/Apache-2.0")
+                        }
+                    }
+                    developers {
+                        developer {
+                            id.set("Seiko")
+                            name.set("SeikoDes")
+                            email.set("seiko_des@outlook.com")
+                        }
+                    }
+                    scm {
+                        url.set("https://github.com/qdsfdhvh/avif-kmp")
+                        connection.set("scm:git:git://github.com/qdsfdhvh/avif-kmp.git")
+                        developerConnection.set("scm:git:git://github.com/qdsfdhvh/avif-kmp.git")
+                    }
                 }
             }
         }
